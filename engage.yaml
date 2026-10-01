@@ -12,6 +12,6 @@ review:
     - "Someone is around to watch the deploy"
 
 ci:
-  # Checks with these names are shown but don't block a deploy
+  # Checks with these names are shown but don't block a deploy. `lint` (.github/workflows/ci.yml) always fails
   allow_failures:
-    - "Dependabot"
+    - "lint"

@@ -1,0 +1,36 @@
+# Fake CI for testing makeitso: one check that passes, one that fails at random, one that always fails.
+# makeitso shows each job as a check on the commit; the job `name` is what engage.yaml's ci settings match
+name: CI
+
+on:
+  push:
+  # Lets you rerun it from the Actions tab to get a new random result
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build passed"
+
+  tests:
+    name: tests
+    runs-on: ubuntu-latest
+    steps:
+      # Fails about half the time, so some commits are blocked and need emergency mode to deploy
+      - run: |
+          if [ $((RANDOM % 2)) -eq 0 ]; then
+            echo "Tests failed (on purpose, at random)"
+            exit 1
+          fi
+          echo "Tests passed"
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      # Always fails; engage.yaml lists it in ci.allow_failures, so it shows red but doesn't block
+      - run: |
+          echo "Lint failed (on purpose, always)"
+          exit 1

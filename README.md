@@ -10,3 +10,13 @@ Each commit behaves differently, so deploy the one you want to test:
 - "Add engage.yaml with a review checklist": the quick 20-step deploy again, plus an `engage.yaml`
   with a three-item checklist (all items must be ticked before Deploy), a 300s timeout and
   `Dependabot` as an allowed failure
+
+## CI
+
+`.github/workflows/ci.yml` runs on every push and adds three checks to each commit:
+
+- `build` always passes
+- `tests` fails about half the time, at random: a failed commit is blocked in makeitso unless you use emergency mode
+- `lint` always fails, but `engage.yaml` lists it in `ci.allow_failures`, so it shows red without blocking
+
+Rerun the workflow from the Actions tab to get a new random result for `tests`.
