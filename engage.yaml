@@ -1,0 +1,17 @@
+# How makeitso deploys this repo. Every setting is optional; see makeitso's src/makeitso/engage/README.md
+
+deploy:
+  file: deploy.sh     # script to run, from the repo root
+  timeout: 300        # seconds before the deploy is stopped
+
+review:
+  # Every item has to be ticked on the deploy page before Deploy can be clicked
+  checklist:
+    - "I checked the commits included in this deploy"
+    - "The team knows this is going out"
+    - "Someone is around to watch the deploy"
+
+ci:
+  # Checks with these names are shown but don't block a deploy
+  allow_failures:
+    - "Dependabot"

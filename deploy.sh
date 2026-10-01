@@ -1,10 +1,10 @@
 #!/bin/bash
-# Test deploy: a line every 5 seconds for 10 minutes, for testing the timeout
+# Test deploy: prints a line a second, deploys nothing
 set -euo pipefail
 
 echo "Deploying $COMMIT_SHA to $ENVIRONMENT"
-for i in $(seq 1 120); do
-  echo "step $i/120"
-  sleep 5
+for i in $(seq 1 20); do
+  echo "step $i/20"
+  sleep 1
 done
 echo "Done"
